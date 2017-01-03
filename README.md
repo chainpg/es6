@@ -6,7 +6,7 @@ ECMAScript 5 （簡稱 ES5）寫過大量前端應用程式在沒有良好的規
 - [Constants](#constants)
 - [Scope](#scope)
 - [Arrow Functions](#arrow-functions)
-- [Enhanced Object Properties](#enhanced-Object-properties)
+- [Enhanced Object Properties](#enhanced-object-properties)
 - [Extended Parameter Handling](#extended-parameter-handling)
 - [Destructuring Assignment](#destructuring-assignment)
 - [Modules](#modules)
