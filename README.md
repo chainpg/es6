@@ -13,7 +13,7 @@ ECMAScript 5 （簡稱 ES5）寫過大量前端應用程式在沒有良好的規
 - [Classes](#Classes)
 - [Symbol Type](#symbol-type)
 - [Iterators](#iterators)
-- [Generators](#Generators)
+- [Generators](#generators)
 - [Map Set](#map-set)
 - [Promises](#promises)
 
