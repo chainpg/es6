@@ -1,6 +1,6 @@
-
 # ECMAScript 6 
 ECMAScript 5 （簡稱 ES5）寫過大量前端應用程式在沒有良好的規範往往會造成效能及程式碼難以維護的狀況，為解決這些問題並讓程式更簡潔也出現了 CoffeeScript 來撰寫 Javascript，但這些問題在 ECMAScript 6（簡稱 ES6）的釋出及 Babel （編譯 ES6 的工具）的發展下，ES6被社群關注度也越來越高，希望把學習的過程記錄並分享。
+
 
 - [Template Literals](#template-literals)
 - [Constants](#constants)
@@ -17,6 +17,7 @@ ECMAScript 5 （簡稱 ES5）寫過大量前端應用程式在沒有良好的規
 - [Map Set](#map-set)
 - [Promises](#promises)
 
+
 # Template Literals
 ES 5 本身對字串本身沒有內建 Template ，所以要達到這功能往往要透過第三方元件，或自己刻一個，相信網路上有一堆範例，某種程度也會造成程式碼不易維護的狀況，ES 6 的出現解決了這問題，來看看下列範例。
 ```
@@ -32,6 +33,7 @@ var b = 2
 var message = `a + b = ${ a + b}`
 console.log(message);
 ```
+[(回頁首)](#ecmascript-6)
 
 # Constants
 程式開發往往需要定義一些常數且任何情況下都不被改變，在 ES5 能達到這目地但需要寫上一段 Object.defineProperty 的語法宣告。
@@ -49,6 +51,7 @@ console.log(myConst.PI);
 ```
 我們會看到 `3.141593` 印出兩次的結果，而且這樣的程式在 ES5 裡面合法，也就是不會有任合錯誤訊息發生。
 
+
 看看 ES6 的做法
 ```
 const PI = 3.141593
@@ -61,8 +64,9 @@ console.log(PI)
 3.141593
 VM231:3 Uncaught TypeError: Assignment to constant variable
 ```
+[(回頁首)](#ecmascript-6)
 
-## Scope
+# Scope
 看一下現實程式碼裡可能發生的悲劇。
 ```
 // A工程師
@@ -95,6 +99,7 @@ for(let i=0 ; i< 3 ; i++){}
 console.log(i);
 ```
 這確保了變數再定義後在該範圍內的唯一性，試著在同範圍定義重複定義如 `let i=0 ; let i=0;` 會直接產生語法錯誤，讓變數定義更加嚴謹。
+[(回頁首)](#ecmascript-6)
 
 # Arrow Functions 
 ```
@@ -117,6 +122,7 @@ var showMembers = () => {
 }
 showMembers();
 ```
+[(回頁首)](#ecmascript-6)
 
 # Enhanced Object Properties
 物件宣告更簡潔，讓屬性更強大
@@ -127,6 +133,7 @@ var customer = { firstName , lastName , [firstName+' number'] : 7 };
 console.log(customer);
 ```
 得到結果`Object {firstName: "Jeremy", lastName: "Lin", Jeremy number: 7}`
+[(回頁首)](#ecmascript-6)
 
 # Extended Parameter Handling
 Javascript 參數在方法定義三個如 a , b , c ，在呼叫時可以只帶入一個，執行時不會出錯不像 JAVA，但沒帶入的參數我們會希望給予預設值，ES5 的寫法
@@ -162,6 +169,7 @@ var a = [3 , 4 ];
 var t = [1 , 2 , ...a];
 console.log(t);
 ```
+[(回頁首)](#ecmascript-6)
 
 # Destructuring Assignment
 陣列跟物件都可以透過新語言的特性將程式再宣告，而在宣告的方式更為精簡且明確，下列是陣列的範例 
@@ -185,6 +193,7 @@ function fun({ a , b}){
 }
 fun({ a: 1 , b : 2});
 ```
+[(回頁首)](#ecmascript-6)
 
 # Modules
 模組具有獨立及不相互污染變數跟單一檔案的特性，模組可相互匯入以及匯出，這樣的表現讓模組在程式區塊獨立，讓每支程式內聚力更強
@@ -193,6 +202,7 @@ fun({ a: 1 , b : 2});
 var name = 'Bill';
 export function whoAreYou() { return name }
 export name
+
 
 //  app.js
 import * as com from "lib/common"
@@ -206,6 +216,7 @@ import { whoAreYou , name} from "lib/common"
 console.log(whoAreYou());
 console.log(name);
 ```
+[(回頁首)](#ecmascript-6)
 
 # Classes
 ES 6 讓開發人員透過新語言特性來更明確的實作物件導向程式（OOP），新語言也可將 ES 5 多種定義類型的方式做統一。
@@ -252,13 +263,17 @@ class Player{
 }
 Player.who()
 ```
+[(回頁首)](#ecmascript-6)
+
 # Symbol Type
 這是繼 Javascript 添加了第7個資料型態，型態有：Undefined、Boolean、NULL、String、Number、Object、Symbol，主要是解決數值再判斷是造成的衝突，如下
 ```
 var type1 = "type";
 var type2 = "type";
 
+
 var input = 'type';
+
 
 switch(input){
   case type1 :
@@ -274,7 +289,9 @@ Symbol 能確保每個變數所乘載的值是獨一無二的，如下
 var type1 = Symbol();
 var type2 = Symbol();
 
+
 var input = type2;
+
 
 switch(input){
   case type1 :
@@ -285,6 +302,7 @@ switch(input){
   break;  
 }
 ```
+[(回頁首)](#ecmascript-6)
 
 # Iterators
 有時候數據結構非現有可以走訪`for(let ? of ?)`的類型，在 ES6 中可以具備走訪的勢必實作Symbol.iterator 的屬性，讓我們將資料實現 Symbol.iterator 的屬性使其可走訪，添加 Symbol.iterator 也必須在其實做 next 的方法，done 屬性為是否繼續走訪而 value 則是當下索引的資料
@@ -295,7 +313,9 @@ class MyTeam{
     this.index = 0;
   }
 
+
   [Symbol.iterator]() { return this; }
+
 
   next() {
     if (this.index < this.members.length) {
@@ -309,21 +329,27 @@ class MyTeam{
   }
 }
 
+
 var brooklynTeam = new MyTeam(
   [{name : "Jeremy"},{name : "Lopez"}]
 );
+
 
 for(let member of brooklynTeam){
   console.log(member);
 }
 
+
 ```
+[(回頁首)](#ecmascript-6)
+
 # Generators
 若程式碼區塊中可依據不同狀態或步驟進行切割，並需要引用時可以依據邏輯進行走訪區塊，參考如下
 ```
 const setup1 = Symbol('setup1');
 const setup2 = Symbol('setup2');
 const setup3 = Symbol('setup3');
+
 
 function* Work() {
   console.log('do setup1');
@@ -335,18 +361,23 @@ function* Work() {
   return;
 }
 
+
 var work = Work();
+
 
 work.next(); // {value: Symbol(setup1), done: false}
 work.next(); // {value: Symbol(setup2), done: false}
 work.next(); // {value: Symbol(setup3), done: false}
 work.next(); // {value: undefined, done: true}
 
+
 // 或這樣走訪 
 for(let setup of work) {
   console.log( setup );
 }
 ```
+[(回頁首)](#ecmascript-6)
+
 # Map Set
 ## Set 
 提供了新的資料結構，當中成員資料不重複。
@@ -356,6 +387,7 @@ teamSet.add('Jeremy');
 teamSet.add('Jeremy');
 teamSet.add('Lopez');
 // 或直接宣告時以參數初始 let teamSet = new Set(['Jeremy','Jeremy','Lopez']);
+
 
 console.log(teamSet);
 // {"Jeremy", "Lopez"}
@@ -369,6 +401,7 @@ for(let member of teamSet.keys()) {
 // Jeremy
 // Lopez
 ```
+
 
 ## WeakSet
 WeakSet 僅允許傳入物件，不允許傳入值，複雜的應用中容易不小心造成記憶體洩漏，如下
@@ -386,7 +419,9 @@ function member() {
 member();
 ```
 
+
 雖然為全局的 names 變數，但宣告為 WeakSet 可確保進行回收
+
 
 ## Map
 資料集(Hash)的 keys 僅能接受字串，而 Map keys 可以接受任何型態，
@@ -395,25 +430,31 @@ let member = { id:1,name:'Jeremy'};
 let team = new Map();
 team.set(member , 'brooklyn');
 
+
 team.get(member); // brooklyn
 team.has(member); // true
 ```
+[(回頁首)](#ecmascript-6)
 
 # Promises
 Promises 更精準的定義了該宣告的程式是處理非同步的處理，這裡採用實務的圖片驗證當作範例，當`<file/>`發生異動表示檔案獲取後，透過兩個非同步的方法來取得對應的參數，`FileReader.onload`取得檔案大小，`Image.onload`取得檔案的寬及高，透過取得寬高各位也可進一步驗證圖片橫版或直版甚至比例。
+
 
 html
 ```
 <input type="file" id="file-upload" multiple="">
 ```
 
+
 script
 ```
 const ERROR_TYPE_NOT_MATCH = 'ERROR_TYPE_NOT_MATCH';
 const ERROR_OUT_SIZE = 'ERROR_OUT_SIZE';
 
+
 function fileCheck(file , limitType , fileSizeKb){
 	var promise = new Promise((resolve, reject) => {
+
 
 		// 驗證檔案類型
 		if(limitType && limitType.indexOf(file.type) == -1){
@@ -432,6 +473,7 @@ function fileCheck(file , limitType , fileSizeKb){
 	    		reject(ERROR_OUT_SIZE);
 	    	}
 
+
 	    	let img = new Image;
 	    	img.onload = function(e){
 	    		resolve({name : file.name , size : KB , width : img.width , height : img.height});
@@ -441,9 +483,11 @@ function fileCheck(file , limitType , fileSizeKb){
 	    }    
 	    reader.readAsDataURL(file);
 
+
 	});
 	return promise;
 }
+
 
 $('#file-upload').change(function(){
 	fileCheck(this.files[0] , ['image/png','image/jpg','image/jpeg'] , 1024).then(function(result){
@@ -453,4 +497,6 @@ $('#file-upload').change(function(){
 	});
 });
 
+
 ```
+[(回頁首)](#ecmascript-6)
