@@ -98,9 +98,10 @@ let i = 1;
 }
 console.log(i);
 
-```javascript
+```
 試著在同範圍定義重複定義如 `let i=0 ; let i=0;` 會直接產生語法錯誤因該要改成`let i = 0; i = 0;`，讓變數定義更加嚴謹。
 [(章節)](#ecmascript-6)
+
 
 # Arrow Functions 
 
@@ -114,14 +115,17 @@ function showMembers(){
 }
 showMembers();
 ```
-
-看到 var self = this 因該滿熟悉的，這是決匿名方法為了取得外層區塊 this 的做法，原本定義方法語法 [function] [argraments]，可以想像顛倒過來在吧[function]改成 => 變成 [argraments] [=>]如下，而且匿名方法還可以直接透過 this 取得外層區塊的 this ，這改變讓程式碼更簡潔。
+看到 var self = this 因該滿熟悉的，這是決匿名方法為了取得外層區塊 this 的做法，原本定義方法語法 function(arguments){}，可以簡化成(arguments) => {} 如下，而且匿名方法還可以直接透過 this 取得外層區塊的 this ，這改變讓程式碼更簡潔。
 ```
 var showMembers = () => {
   this.preWorld = 'Hello ';
   ['Bill' , 'Kris' , 'Tommy'].forEach((v) => {
     console.log(this.preWorld + v);
    });
+   // 如果只有一個argument可僅進一步簡化成
+   //['Bill' , 'Kris' , 'Tommy'].forEach(v =>
+   //   console.log(this.preWorld + v);
+   // );
 }
 showMembers();
 ```
