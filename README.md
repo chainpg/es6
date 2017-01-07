@@ -116,7 +116,7 @@ function showMembers(){
 showMembers();
 ```
 看到 var self = this 因該滿熟悉的，這是決匿名方法為了取得外層區塊 this 的做法，原本定義方法語法 function(arguments){}，可以簡化成(arguments) => {} 如下，而且匿名方法還可以直接透過 this 取得外層區塊的 this ，這改變讓程式碼更簡潔。
-```
+```javascript
 var showMembers = () => {
   this.preWorld = 'Hello ';
   ['Bill' , 'Kris' , 'Tommy'].forEach((v) => {
